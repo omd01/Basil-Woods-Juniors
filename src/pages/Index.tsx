@@ -5,7 +5,7 @@ import ProgramsSection from "@/components/ProgramsSection";
 import USPSection from "@/components/USPSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
-import CTA from "@/components/cta";
+import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -26,7 +26,7 @@ const Index = () => {
       <USPSection />
       <TestimonialsSection />
       <FacilitiesSection />
-      <CTA/>
+      <CTA />
       <Footer />
     </div>
   );

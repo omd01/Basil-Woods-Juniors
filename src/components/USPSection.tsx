@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Building2, Building, MapPin, BookOpen, Trophy, GraduationCap, Sprout, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 /*
 USPSection — aligned with site standard
@@ -35,15 +36,15 @@ const WaveBottom = ({ fill = "#eee7fa" }) => (
 // Gradient mapper -> your existing utilities
 const gradientClass = (g) =>
   g === "gradient-swing" ? "bg-gradient-primary"
-  : g === "gradient-slide" ? "bg-gradient-secondary"
-  : g === "gradient-seesaw" ? "bg-gradient-accent"
-  : "bg-gradient-primary";
+    : g === "gradient-slide" ? "bg-gradient-secondary"
+      : g === "gradient-seesaw" ? "bg-gradient-accent"
+        : "bg-gradient-primary";
 
 const USPSection = () => {
   const stats = [
     { number: "11", label: "Preschools", icon: Building2, gradient: "gradient-slide" },
-    { number: "6",  label: "Cities",     icon: Building, gradient: "gradient-swing" },
-    { number: "4",  label: "States",     icon: MapPin, gradient: "gradient-seesaw" },
+    { number: "6", label: "Cities", icon: Building, gradient: "gradient-swing" },
+    { number: "4", label: "States", icon: MapPin, gradient: "gradient-seesaw" },
   ];
 
   const advantages = [
@@ -84,23 +85,33 @@ const USPSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-          <div
-            className="px-4 py-2 rounded-full inline-flex items-center gap-2 mb-4 text-white"
+        <motion.div
+          className="text-center max-w-4xl mx-auto mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <motion.div
+            className="px-5 py-2.5 rounded-full inline-flex items-center gap-2 mb-6 text-white shadow-lg shadow-orange-500/20"
             style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}
+            whileHover={{ scale: 1.05 }}
           >
             <Star className="w-4 h-4 fill-white" />
-            Our Impact
-          </div>
+            <span className="font-bold tracking-wide text-sm uppercase">Our Impact</span>
+          </motion.div>
 
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-800 leading-tight mb-3">
-            Where Vision Meets Experience
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-neutral-800 leading-tight mb-6 tracking-tight">
+            Where Vision Meets <br className="hidden md:block" />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--premium-orange))] to-[hsl(var(--premium-pink))]">
+              Experience
+            </span>
           </h2>
 
-          <p className="text-neutral-700 text-base md:text-lg leading-relaxed">
-            Spreading our wings across India to enable a smarter generation of children.
+          <p className="text-neutral-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+            Spreading our wings across India to enable a <span className="font-bold text-[hsl(var(--premium-teal))]">smarter generation</span> of children.
           </p>
-        </div>
+        </motion.div>
 
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-4xl mx-auto">
