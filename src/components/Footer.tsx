@@ -17,7 +17,7 @@ const Footer = () => {
     { name: "Programs", href: "/programs" },
     { name: "Admissions", href: "/building" },
     { name: "Gallery", href: "/gallery" },
-    { name: "Parent Resources", href: "/partners" },
+    // { name: "Parent Resources", href: "/partners" },
     { name: "Contact", href: "/contact" }
   ];
 
@@ -134,7 +134,7 @@ const Footer = () => {
             <div className="flex gap-4">
               {[
                 { icon: RiFacebookCircleFill, href: "https://www.facebook.com/people/Basil-Woods-Juniors-International-Pre-School-Day-Care-Chennai/61576063646448/?checkpoint_src=any", color: "text-blue-600" },
-                { icon: RiInstagramFill, href: "https://www.instagram.com/basilwoodsjuniors_chennai", color: "text-pink-600" },
+                { icon: RiInstagramFill, href: "https://www.instagram.com/basilwoodsjuniors_chennai", color: "text-red-500" },
                 { icon: RiYoutubeFill, href: "https://www.youtube.com/@BWJChennai", color: "text-red-600" }
               ].map((social, i) => (
                 <motion.a
@@ -155,9 +155,9 @@ const Footer = () => {
               <p className="text-white/60 text-sm mb-1">
                 © 2024 Basil Woods Juniors Chennai.
               </p>
-              <p className="text-white/40 text-xs flex items-center justify-center md:justify-end gap-1">
-                Made with <Heart className="w-3 h-3 fill-red-500 text-red-500" /> by Talentronaut Team
-              </p>
+              <a href="https://www.talentronaut.in/" target="_blank" rel="noopener noreferrer"><p className="text-white/40 text-xs flex items-center justify-center md:justify-end gap-1">
+                Made with <Heart className="w-3 h-3 fill-red-500 text-red-500" /> by Talentronaut Technologies Pvt Ltd
+              </p></a>
             </div>
           </div>
         </div>

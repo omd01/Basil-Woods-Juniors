@@ -122,6 +122,7 @@ const HeroSection = () => {
               </motion.button>
 
               <motion.button
+                onClick={() => window.open("https://www.youtube.com/watch?v=w4WyoDOi460", "_blank")}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95, y: 0 }}
                 className="w-full sm:w-auto bg-white text-[hsl(var(--brand-dark-green))] text-xl font-black px-8 py-4 rounded-2xl border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-3 transition-all hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1"
