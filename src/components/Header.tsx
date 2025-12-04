@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Phone, MapPin, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Phone, MapPin, Menu, X, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "/BWJ Logos.png";
 import { FaWhatsapp } from "react-icons/fa";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -17,228 +18,166 @@ const Header = () => {
     { name: "Gallery", path: "/gallery" },
     { name: "Careers", path: "/careers" },
     { name: "Contact Us", path: "/contact" },
-    { name: "Other Campuses", path: "/Campuses" },
+    { name: "Other Campuses", path: "/campuses" },
   ];
 
-  const phoneNumber = "918056179108"; // ✅ Use full number with country code
+  const phoneNumber = "918056179108";
   const handleWhatsAppRedirect = () => {
     window.open(`https://wa.me/${phoneNumber}`, "_blank");
   };
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="bg-white/95 backdrop-blur-md shadow-premium sticky top-0 z-50 border-b border-neutral-100">
-      <div className="container mx-auto px-3">
-
-        {/* 🔸 Top mini bar with enhanced animations */}
-        <div className="hidden md:flex justify-between py-1.5 text-xs border-b border-neutral-100">
-          <div className="flex items-center gap-4 text-neutral-500">
-            <motion.div
-              className="flex items-center gap-1 cursor-pointer"
-              whileHover={{ scale: 1.05, color: "hsl(var(--premium-orange))" }}
-              transition={{ duration: 0.2 }}
-            >
-              <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}>
-                <Phone className="w-3.5 h-3.5" />
-              </motion.div>
-              <span className="font-medium">+91 8056179108</span>
-            </motion.div>
-
-            <motion.div
-              className="flex items-center gap-1 cursor-pointer"
-              whileHover={{ scale: 1.05, color: "hsl(var(--premium-teal))" }}
-              transition={{ duration: 0.2 }}
-            >
-              <motion.div whileHover={{ y: [0, -2, 0] }} transition={{ duration: 0.5, repeat: Infinity }}>
-                <MapPin className="w-3.5 h-3.5" />
-              </motion.div>
-              <span className="font-medium">Chennai, Tamil Nadu</span>
-            </motion.div>
+    <>
+      {/* Top Bar - Dark & Premium */}
+      <div className="bg-[hsl(var(--brand-dark-green))] text-white py-2 hidden md:block relative z-50">
+        <div className="container mx-auto px-4 flex justify-between items-center text-xs font-medium tracking-wide">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity cursor-pointer">
+              <Phone className="w-3.5 h-3.5 text-[hsl(var(--premium-orange))]" />
+              <span>+91 8056179108</span>
+            </div>
+            <div className="flex items-center gap-2 opacity-90 hover:opacity-100 transition-opacity cursor-pointer">
+              <MapPin className="w-3.5 h-3.5 text-[hsl(var(--premium-teal))]" />
+              <span>Chennai, Tamil Nadu</span>
+            </div>
           </div>
-
-          <motion.div
-            className="bg-gradient-primary text-white px-3 py-1 rounded-full text-xs font-semibold shadow-colored"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            ✨ Admissions Open 2025-26 ✨
-          </motion.div>
+          <div className="flex items-center gap-4">
+            <span className="bg-white/10 px-3 py-0.5 rounded-full text-[10px] uppercase tracking-wider">
+              Admissions Open 2025-26
+            </span>
+          </div>
         </div>
+      </div>
 
-        {/* 🔸 Main navbar */}
-        <div className="flex items-center justify-between py-2.5">
+      {/* Main Header */}
+      <header
+        className={`sticky top-0 z-40 transition-all duration-300 border-b ${scrolled
+            ? "bg-white/90 backdrop-blur-lg shadow-md border-neutral-200/50 py-2"
+            : "bg-white border-transparent py-4"
+          }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
 
-          {/* Logo with enhanced animation */}
-          <Link to="/" className="flex items-center">
-            <motion.img
-              src={logo}
-              alt="Basil Woods Juniors Logo"
-              className="w-16 h-16"
-              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-            />
-          </Link>
+            {/* Logo */}
+            <Link to="/" className="relative z-50 group">
+              <motion.img
+                src={logo}
+                alt="Basil Woods Juniors"
+                className={`transition-all duration-300 ${scrolled ? "w-14 h-14" : "w-16 h-16 md:w-20 md:h-20"}`}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              />
+            </Link>
 
-          {/* Desktop nav with enhanced animations */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item, index) => {
-              const isActive = location.pathname === item.path;
-              return (
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1 bg-neutral-100/50 p-1.5 rounded-full border border-neutral-200/50">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors"
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0 bg-white rounded-full shadow-sm border border-neutral-200/50"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className={`relative z-10 ${isActive ? "text-[hsl(var(--brand-dark-green))]" : "text-neutral-600 hover:text-neutral-900"}`}>
+                      {item.name}
+                    </span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-3">
+              <Button
+                onClick={handleWhatsAppRedirect}
+                className="hidden md:flex bg-[hsl(var(--premium-green))] hover:bg-[hsl(var(--brand-dark-green))] text-white rounded-full px-5 shadow-lg shadow-green-500/20 transition-all hover:scale-105"
+              >
+                <FaWhatsapp className="w-4 h-4 mr-2" />
+                Chat with Us
+              </Button>
+
+              <Button
+                variant="outline"
+                className="hidden md:flex border-[hsl(var(--premium-orange))] text-[hsl(var(--premium-orange))] hover:bg-[hsl(var(--premium-orange))] hover:text-white rounded-full px-5 transition-all"
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Book a Visit
+              </Button>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                className="lg:hidden p-2 rounded-full bg-neutral-100 text-neutral-800 hover:bg-neutral-200 transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-30 bg-white pt-24 px-4 lg:hidden overflow-y-auto"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item, idx) => (
                 <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative"
+                  key={item.path}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.05 }}
                 >
                   <Link
                     to={item.path}
-                    className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 block
-                      ${isActive
-                        ? "text-orange-600 bg-orange-50"
-                        : "text-gray-700 hover:text-orange-600"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block p-4 rounded-xl text-lg font-medium transition-colors ${location.pathname === item.path
+                        ? "bg-[hsl(var(--premium-orange))/10] text-[hsl(var(--premium-orange))]"
+                        : "text-neutral-600 hover:bg-neutral-50"
                       }`}
                   >
                     {item.name}
-
-                    {/* Animated underline on hover */}
-                    {!isActive && (
-                      <motion.span
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary rounded-full"
-                        initial={{ scaleX: 0 }}
-                        whileHover={{ scaleX: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
-
-                    {/* Active indicator with pulse */}
-                    {isActive && (
-                      <motion.span
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-primary rounded-full"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.4 }}
-                      >
-                        <motion.span
-                          className="absolute inset-0 bg-orange-400 rounded-full"
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        />
-                      </motion.span>
-                    )}
                   </Link>
                 </motion.div>
-              );
-            })}
-          </nav>
+              ))}
 
-          {/* CTA + Mobile menu */}
-          <div className="flex items-center gap-2">
-            {/* ✅ Desktop WhatsApp Button with enhanced animation */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                size="sm"
-                className="hidden md:flex items-center gap-2 btn-primary hover-glow px-4 py-2.5 shadow-sm font-medium text-sm"
-                onClick={handleWhatsAppRedirect}
-              >
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              <div className="mt-6 flex flex-col gap-3">
+                <Button
+                  onClick={handleWhatsAppRedirect}
+                  className="w-full bg-[hsl(var(--premium-green))] text-white py-6 rounded-xl text-lg"
                 >
-                  <FaWhatsapp className="w-6 h-6" />
-                </motion.div>
-                <span>Contact Us</span>
-              </Button>
-            </motion.div>
-
-            {/* Mobile menu toggle with animation */}
-            <motion.button
-              className="lg:hidden p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <motion.div
-                initial={false}
-                animate={{ rotate: isMenuOpen ? 90 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isMenuOpen ? (
-                  <X className="w-5 h-5 text-gray-700" />
-                ) : (
-                  <Menu className="w-5 h-5 text-gray-700" />
-                )}
-              </motion.div>
-            </motion.button>
-          </div>
-        </div>
-
-        {/* 🔸 Mobile nav with animations */}
-        {isMenuOpen && (
-          <motion.div
-            className="lg:hidden pb-3 border-t border-gray-100 bg-white/90 backdrop-blur-sm rounded-b-xl overflow-hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <nav className="flex flex-col gap-0.5 mt-2">
-              {navItems.map((item, index) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                  >
-                    <Link
-                      to={item.path}
-                      className={`relative py-2.5 px-3 text-sm font-medium rounded-lg transition-all duration-300 block
-                        ${isActive
-                          ? "text-orange-600 bg-orange-50"
-                          : "text-gray-700 hover:text-orange-600 hover:bg-orange-50"
-                        }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-
-                      {/* Active indicator */}
-                      {isActive && (
-                        <motion.span
-                          className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-primary rounded-r-full"
-                          initial={{ scaleY: 0 }}
-                          animate={{ scaleY: 1 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                      )}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-
-              {/* ✅ Mobile WhatsApp Button with animation */}
-              <motion.div
-                className="mt-2 px-3"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
-              >
-                <motion.div whileTap={{ scale: 0.95 }}>
-                  <Button
-                    size="sm"
-                    className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg py-2.5 font-medium text-sm shadow-md flex items-center justify-center gap-2"
-                    onClick={handleWhatsAppRedirect}
-                  >
-                    <FaWhatsapp className="w-6 h-6" />
-                    Contact Us
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </nav>
+                  <FaWhatsapp className="w-5 h-5 mr-2" />
+                  Chat on WhatsApp
+                </Button>
+              </div>
+            </div>
           </motion.div>
         )}
-      </div>
-    </header>
+      </AnimatePresence>
+    </>
   );
 };
 
