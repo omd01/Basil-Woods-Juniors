@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Sparkles, Star, Sun, Cloud, Heart, ArrowRight, Bird } from "lucide-react";
+import { Play, Sparkles, Star, Sun, Cloud, Heart, ArrowRight, Bird, Calendar } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaWhatsapp } from 'react-icons/fa';
 
@@ -16,6 +17,7 @@ const handleWhatsAppRedirect = () => {
 };
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const images = [picture1, picture2, picture3];
   const [active, setActive] = useState(0);
   const { scrollY } = useScroll();
@@ -110,12 +112,12 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <motion.button
-                onClick={handleWhatsAppRedirect}
+                onClick={() => navigate("/contact")}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95, y: 0 }}
                 className="w-full sm:w-auto bg-[hsl(var(--premium-orange))] text-white text-xl font-black px-8 py-4 rounded-2xl border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-3 transition-all hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1"
               >
-                <FaWhatsapp className="w-6 h-6" />
+                <Calendar className="w-6 h-6" />
                 Book a Visit
               </motion.button>
 

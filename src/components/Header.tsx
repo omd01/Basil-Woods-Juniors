@@ -27,6 +27,8 @@ const Header = () => {
     window.open(`https://wa.me/${phoneNumber}`, "_blank");
   };
 
+
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -125,7 +127,7 @@ const Header = () => {
                 className="hidden md:flex bg-white text-[hsl(var(--premium-orange))] font-bold rounded-xl px-5 py-2.5 border-2 border-[hsl(var(--premium-orange))] shadow-[4px_4px_0px_0px_hsl(var(--premium-orange))] hover:shadow-[6px_6px_0px_0px_hsl(var(--premium-orange))] transition-all items-center gap-2"
               >
                 <Calendar className="w-4 h-4" />
-                <span>Book a Visit</span>
+                <a href="/contact"><span>Book a Visit</span></a>
               </motion.button>
 
               {/* Mobile Menu Toggle */}

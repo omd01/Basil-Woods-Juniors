@@ -9,6 +9,8 @@ import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import { useSEO } from "@/hooks/useSEO";
 
+import Preloader from "@/components/ui/preloader";
+
 const Index = () => {
   useSEO({
     title: "Best Preschool & Daycare Chennai | Play-Based Learning",
@@ -19,6 +21,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background font-body">
+      <Preloader />
       <Header />
       <HeroSection />
       <AboutSection />

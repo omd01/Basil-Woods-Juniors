@@ -16,7 +16,7 @@ import WhatsAppBubble from "@/components/ui/whatsapp-bubble";
 import Building from "./pages/Building";
 import Campuses from "./pages/OtherCampuses";
 import { ScrollToTop } from "./components/ui/scrollToTop";
-import Preloader from "./components/ui/preloader";
+
 import ScrollProgress from "./components/ui/scroll-progress";
 
 const queryClient = new QueryClient();
@@ -24,8 +24,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      {/* Playful Preloader with bouncing animation */}
-      <Preloader />
+
 
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
