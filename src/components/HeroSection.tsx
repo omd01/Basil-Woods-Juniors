@@ -1,209 +1,183 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Calendar, Users, Award, Star, Sparkles, Leaf, BookOpen, Palette, Heart } from "lucide-react";
+import { Play, Sparkles, Star, Sun, Cloud, Heart, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { FaWhatsapp } from 'react-icons/fa';
 
-/* Import exactly 3 images from src/assets */
+/* Import images */
 import picture1 from "../assets/Images/Picture1.webp";
 import picture2 from "../assets/Images/Picture2.webp";
 import picture3 from "../assets/Images/Picture3.webp";
-import { FaWhatsapp } from 'react-icons/fa';
 
-
-const phoneNumber = "918056179108"; // ✅ Use full number with country code
+const phoneNumber = "918056179108";
 const handleWhatsAppRedirect = () => {
   window.open(`https://wa.me/${phoneNumber}`, "_blank");
 };
 
-
-/* Site-standard waves */
-const WaveTop = ({ fill = "#f2ede6" }) => (
-  <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-    <svg className="relative block w-full h-[60px]" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill={fill}
-        d="M0,256L48,240C96,224,192,192,288,170.7C384,149,480,139,576,154.7C672,171,768,213,864,208C960,203,1056,149,1152,117.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      />
-    </svg>
-  </div>
-);
-
-const WaveBottom = ({ fill = "#f6eee7" }) => (
-  <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-    <svg className="relative block w-full h-[60px]" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill={fill}
-        d="M0,256L48,240C96,224,192,192,288,170.7C384,149,480,139,576,154.7C672,171,768,213,864,208C960,203,1056,149,1152,117.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      />
-    </svg>
-  </div>
-);
-
 const HeroSection = () => {
-  // Carousel state
   const images = [picture1, picture2, picture3];
   const [active, setActive] = useState(0);
 
-  // Auto-advance every 3 seconds
+  // Auto-advance carousel
   useEffect(() => {
     const id = setInterval(() => {
       setActive((prev) => (prev + 1) % images.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(id);
   }, [images.length]);
 
   return (
-    <section
-      className="
-        relative bg-section-1 overflow-hidden flex items-center
-        min-h-[calc(100vh-var(--header-h))] pt-[max(env(safe-area-inset-top),0px)]
-      "
-    >
-      {/* Subtle decorative shapes */}
-      <div className="absolute top-12 left-4 w-8 h-8 bg-gradient-primary rounded-2xl opacity-25" />
-      <div className="absolute bottom-16 right-6 w-7 h-7 bg-gradient-secondary rounded-full opacity-25" />
-      <div className="absolute top-1/3 left-1/5 w-6 h-6 bg-gradient-accent rounded-xl opacity-20" />
+    <section className="relative min-h-[90vh] flex items-center bg-[hsl(var(--light-orange))] overflow-hidden pt-20 pb-10 md:pt-0 md:pb-0">
 
-      <div className="container mx-auto px-4 lg:px-6 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-8 items-center w-full">
-          {/* Left Content (unchanged) */}
-          <div className="space-y-4">
-            <Badge className="bg-gradient-primary text-white px-4 py-2 rounded-full border-none font-medium inline-block text-xs lg:text-sm">
-              <Sparkles className="w-4 h-4 inline-block mr-1.5" />
-              Welcome to Basil Woods Juniors Chennai
-            </Badge>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-10 text-[hsl(var(--premium-yellow))]"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <Sun className="w-16 h-16 opacity-40" />
+        </motion.div>
 
-            <h1 className="text-[30px] leading-[1.15] lg:text-[55px] font-bold text-[#0F854D]">
-              Where Little Minds
-              <span className="block text-gradient">Bloom & Grow</span>
-            </h1>
+        <motion.div
+          className="absolute top-40 right-20 text-[hsl(var(--premium-teal))]"
+          animate={{ x: [0, 20, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Cloud className="w-20 h-20 opacity-30" />
+        </motion.div>
 
-            <p className="text-base lg:text-lg text-neutral-600 leading-relaxed max-w-md">
-              Nurturing young learners in Chennai through play-based education, cultural values, and endless possibilities.
-            </p>
+        {/* Blobs */}
+        <div className="absolute -top-20 -right-20 w-96 h-96 bg-[hsl(var(--premium-pink)/0.1)] rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[hsl(var(--premium-teal)/0.1)] rounded-full blur-3xl" />
+      </div>
 
-            {/* CTA Buttons — standardized */}
-            <div className="flex flex-col sm:flex-row gap-3">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+
+          {/* Left Content */}
+          <div className="flex-1 text-center lg:text-left space-y-6 md:space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Badge className="bg-white text-[hsl(var(--premium-orange))] px-4 py-1.5 rounded-full text-sm font-bold shadow-sm border border-orange-100 mb-6 inline-flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Admissions Open for 2025-26
+              </Badge>
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-[hsl(var(--brand-dark-green))] leading-[1.1] tracking-tight mb-4">
+                Where Little <br className="hidden lg:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--premium-orange))] to-[hsl(var(--premium-pink))]">
+                  Minds Bloom
+                </span>
+              </h1>
+
+              <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                A magical place where learning meets play. We nurture curiosity, creativity, and confidence in every child.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <Button
-                className="rounded-xl px-6 py-3 font-bold shadow-sm hover:shadow-md transition-all"
-                style={{ backgroundColor: "hsl(var(--premium-orange))", color: "white" }}
                 onClick={handleWhatsAppRedirect}
+                className="w-full sm:w-auto h-14 px-8 rounded-2xl bg-[hsl(var(--premium-orange))] hover:bg-[hsl(var(--premium-orange)/0.9)] text-white text-lg font-bold shadow-lg shadow-orange-500/20 transition-transform hover:scale-105"
               >
-                <FaWhatsapp className="w-5 h-5" />
-                Contact Us
+                <FaWhatsapp className="w-5 h-5 mr-2" />
+                Book a Visit
               </Button>
-              <a
-                href="https://www.youtube.com/watch?v=w4WyoDOi460"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  variant="outline"
-                  className="rounded-xl px-6 py-3 font-bold transition-all border-2 hover:bg-white"
-                  style={{ borderColor: "hsl(var(--premium-orange))", color: "hsl(var(--premium-orange))" }}
-                >
-                  <Play className="w-5 h-5 mr-2" />
-                  Watch Story
-                </Button>
-              </a>
 
-            </div>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto h-14 px-8 rounded-2xl border-2 border-[hsl(var(--brand-dark-green))] text-[hsl(var(--brand-dark-green))] hover:bg-[hsl(var(--brand-dark-green)/0.05)] text-lg font-bold"
+              >
+                <Play className="w-5 h-5 mr-2 fill-current" />
+                Watch Video
+              </Button>
+            </motion.div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap gap-2.5">
-              <div className="flex items-center gap-1.5 bg-white/70 px-2.5 py-1 rounded-full text-[12px] border border-[hsl(var(--neutral-100))]">
-                <Star className="w-4 h-4" style={{ color: "hsl(var(--premium-yellow))" }} />
-                <span className="text-neutral-700 font-medium">15+ Years</span>
+            <motion.div
+              className="pt-4 flex items-center justify-center lg:justify-start gap-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="text-center lg:text-left">
+                <div className="text-2xl font-black text-[hsl(var(--brand-dark-green))]">15+</div>
+                <div className="text-sm text-neutral-500 font-medium">Years of Joy</div>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/70 px-2.5 py-1 rounded-full text-[12px] border border-[hsl(var(--neutral-100))]">
-                <Users className="w-4 h-4" style={{ color: "hsl(var(--premium-teal))" }} />
-                <span className="text-neutral-700 font-medium">500+ Families</span>
+              <div className="w-px h-10 bg-neutral-200" />
+              <div className="text-center lg:text-left">
+                <div className="text-2xl font-black text-[hsl(var(--brand-dark-green))]">500+</div>
+                <div className="text-sm text-neutral-500 font-medium">Happy Families</div>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/70 px-2.5 py-1 rounded-full text-[12px] border border-[hsl(var(--neutral-100))]">
-                <Award className="w-4 h-4" style={{ color: "hsl(var(--premium-pink))" }} />
-                <span className="text-neutral-700 font-medium">Award Winning</span>
-              </div>
-            </div>
-
-            {/* Feature tiles */}
-            <div className="grid grid-cols-4 gap-3 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl border border-[hsl(var(--neutral-100))] shadow-sm max-w-lg">
-              {[
-                { icon: Palette, label: "Culture", chip: "hsl(var(--premium-orange))" },
-                { icon: Leaf, label: "Nature", chip: "hsl(var(--premium-teal))" },
-                { icon: BookOpen, label: "Learning", chip: "hsl(var(--premium-purple))" },
-                { icon: Sparkles, label: "Arts", chip: "hsl(var(--premium-pink))" },
-              ].map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <div key={idx} className="text-center">
-                    <div
-                      className="w-11 h-11 mx-auto mb-1.5 rounded-2xl flex items-center justify-center text-white shadow-sm transition-transform hover:-translate-y-[1px]"
-                      style={{ backgroundColor: item.chip }}
-                    >
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                    <span className="text-[11px] font-semibold text-neutral-700">{item.label}</span>
-                  </div>
-                );
-              })}
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right: Image Carousel */}
-          <div className="relative w-full">
-            <div className="relative z-10 w-full overflow-hidden rounded-2xl">
-              <div className="absolute inset-0 bg-gradient-hero rounded-2xl opacity-20" />
-              {/* Slides */}
-              <div className="relative h-[300px] sm:h-[360px] md:h-[380px] lg:h-[440px] xl:h-[460px]">
+          {/* Right Visuals */}
+          <div className="flex-1 relative w-full max-w-lg lg:max-w-none">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative aspect-square md:aspect-[4/3] lg:aspect-square"
+            >
+              {/* Organic Blob Shape Mask */}
+              <div className="absolute inset-0 bg-[hsl(var(--premium-teal))] rounded-[3rem] rotate-3 opacity-10 scale-105" />
+              <div className="absolute inset-0 bg-[hsl(var(--premium-orange))] rounded-[3rem] -rotate-2 opacity-10 scale-105" />
+
+              <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white transform rotate-0 hover:rotate-1 transition-transform duration-500">
                 {images.map((src, idx) => (
-                  <img
+                  <motion.img
                     key={idx}
                     src={src}
                     alt={`Basil Woods slide ${idx + 1}`}
-                    className={`
-                      absolute inset-0 w-full h-full object-cover rounded-2xl border-4 border-white
-                      transition-opacity duration-700 ease-in-out
-                      ${active === idx ? "opacity-100" : "opacity-0"}
-                    `}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: active === idx ? 1 : 0 }}
+                    transition={{ duration: 1 }}
                   />
                 ))}
+
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
 
-              {/* Floating badge */}
-              <div
-                className="absolute bottom-3 right-3 rounded-lg px-3 py-1.5 shadow-sm"
-                style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}
+              {/* Floating Badge */}
+              <motion.div
+                className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-neutral-100 flex items-center gap-3 max-w-[200px]"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <div className="flex items-center gap-1.5">
-                  <Heart className="w-4 h-4 text-white fill-white" />
-                  <span className="text-white text-[12px] font-semibold">Rooted in Values</span>
+                <div className="bg-[hsl(var(--premium-pink)/0.1)] p-2 rounded-full">
+                  <Heart className="w-6 h-6 text-[hsl(var(--premium-pink))] fill-current" />
                 </div>
-              </div>
-            </div>
+                <div>
+                  <div className="text-xs text-neutral-500 font-bold uppercase tracking-wider">Rated</div>
+                  <div className="text-sm font-bold text-neutral-800">Best Preschool</div>
+                </div>
+              </motion.div>
 
-            {/* Soft background tints */}
-            <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-primary rounded-full opacity-15 -z-10" />
-            <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-secondary rounded-full opacity-15 -z-10" />
-
-            {/* Dots indicator (subtle, theme-consistent) */}
-            <div className="mt-3 flex items-center justify-center gap-2">
-              {images.map((_, idx) => (
-                <span
-                  key={idx}
-                  className="block w-2 h-2 rounded-full transition-colors"
-                  style={{
-                    backgroundColor:
-                      active === idx ? "hsl(var(--premium-orange))" : "hsl(var(--neutral-100))",
-                  }}
-                />
-              ))}
-            </div>
+              {/* Decorative Star */}
+              <motion.div
+                className="absolute -top-8 -right-8 text-[hsl(var(--premium-yellow))]"
+                animate={{ rotate: [0, 180, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 5, repeat: Infinity }}
+              >
+                <Star className="w-16 h-16 fill-current" />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
-
-      {/* Separator wave to next section */}
-      <WaveBottom fill="#f6eee7" />
     </section>
   );
 };
