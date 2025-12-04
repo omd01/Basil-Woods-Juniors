@@ -2,14 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import WaveDivider from "@/components/ui/wave-divider";
+import { Palette, Leaf, BookOpen, Sparkles, Smile, Star } from "lucide-react";
 import mainImage from "../assets/Images/tulsi.webp";
 
 const AboutSection = () => {
   const features = [
-    { name: "Culture Connect", icon: "🎨" },
-    { name: "Nature Learning", icon: "🌱" },
-    { name: "Holistic Curriculum", icon: "📚" },
-    { name: "Creative Adventures", icon: "🎭" },
+    { name: "Culture Connect", icon: Palette },
+    { name: "Nature Learning", icon: Leaf },
+    { name: "Holistic Curriculum", icon: BookOpen },
+    { name: "Creative Adventures", icon: Sparkles },
   ];
 
   return (
@@ -58,11 +59,11 @@ const AboutSection = () => {
 
               {/* Circular inset with icon */}
               <motion.div
-                className="absolute -bottom-4 -right-4 w-20 h-20 bg-white rounded-full p-1.5 shadow-sm border border-[hsl(var(--neutral-100))] flex items-center justify-center text-3xl"
+                className="absolute -bottom-4 -right-4 w-20 h-20 bg-white rounded-full p-1.5 shadow-sm border border-[hsl(var(--neutral-100))] flex items-center justify-center"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                😊
+                <Smile className="w-10 h-10" style={{ color: "hsl(var(--premium-orange))" }} strokeWidth={2} />
               </motion.div>
             </Card>
             {/* small decorative chip */}
@@ -84,10 +85,11 @@ const AboutSection = () => {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
           >
             <div
-              className="px-4 py-2 rounded-full inline-block font-medium text-white"
+              className="px-4 py-2 rounded-full inline-flex items-center gap-2 font-medium text-white"
               style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}
             >
-              🌟 About Basil Woods Juniors
+              <Star className="w-4 h-4 fill-white" />
+              About Basil Woods Juniors
             </div>
 
             <div className="space-y-3">
@@ -109,22 +111,25 @@ const AboutSection = () => {
             </Card>
 
             <div className="grid grid-cols-2 gap-3">
-              {features.map((f, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-center gap-3 bg-white p-4 rounded-2xl shadow-sm border border-[hsl(var(--neutral-100))] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white" style={{ backgroundColor: "hsl(var(--premium-orange))" }}>
-                    <span className="text-sm">{f.icon}</span>
-                  </div>
-                  <span className="font-semibold text-neutral-800 text-sm md:text-base">{f.name}</span>
-                </motion.div>
-              ))}
+              {features.map((f, i) => {
+                const IconComponent = f.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    className="flex items-center gap-3 bg-white p-4 rounded-2xl shadow-sm border border-[hsl(var(--neutral-100))] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
+                    whileHover={{ scale: 1.03 }}
+                  >
+                    <div className="w-8 h-8 rounded-xl flex items-center justify-center text-white" style={{ backgroundColor: "hsl(var(--premium-orange))" }}>
+                      <IconComponent className="w-4 h-4" />
+                    </div>
+                    <span className="font-semibold text-neutral-800 text-sm md:text-base">{f.name}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>

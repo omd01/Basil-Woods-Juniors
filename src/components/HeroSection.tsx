@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Calendar, Users, Award, Star } from "lucide-react";
+import { Play, Calendar, Users, Award, Star, Sparkles, Leaf, BookOpen, Palette, Heart } from "lucide-react";
 
 /* Import exactly 3 images from src/assets */
 import picture1 from "../assets/Images/Picture1.webp";
@@ -69,10 +69,11 @@ const HeroSection = () => {
           {/* Left Content (unchanged) */}
           <div className="space-y-4">
             <Badge className="bg-gradient-primary text-white px-4 py-2 rounded-full border-none font-medium inline-block text-xs lg:text-sm">
-              🌟 Welcome to Basil Woods Juniors Chennai
+              <Sparkles className="w-4 h-4 inline-block mr-1.5" />
+              Welcome to Basil Woods Juniors Chennai
             </Badge>
 
-            <h1 className="text-[30px] leading-[1.15] lg:text-[40px] font-bold text-neutral-700">
+            <h1 className="text-[30px] leading-[1.15] lg:text-[55px] font-bold text-[#0F854D]">
               Where Little Minds
               <span className="block text-gradient">Bloom & Grow</span>
             </h1>
@@ -127,21 +128,24 @@ const HeroSection = () => {
             {/* Feature tiles */}
             <div className="grid grid-cols-4 gap-3 p-3.5 bg-white/95 backdrop-blur-md rounded-2xl border border-[hsl(var(--neutral-100))] shadow-sm max-w-lg">
               {[
-                { emoji: "🎨", label: "Culture", chip: "hsl(var(--premium-orange))" },
-                { emoji: "🌱", label: "Nature", chip: "hsl(var(--premium-teal))" },
-                { emoji: "📚", label: "Learning", chip: "hsl(var(--premium-purple))" },
-                { emoji: "🎭", label: "Arts", chip: "hsl(var(--premium-pink))" },
-              ].map((item, idx) => (
-                <div key={idx} className="text-center">
-                  <div
-                    className="w-11 h-11 mx-auto mb-1.5 rounded-2xl flex items-center justify-center text-white shadow-sm transition-transform hover:-translate-y-[1px]"
-                    style={{ backgroundColor: item.chip }}
-                  >
-                    <span className="text-lg">{item.emoji}</span>
+                { icon: Palette, label: "Culture", chip: "hsl(var(--premium-orange))" },
+                { icon: Leaf, label: "Nature", chip: "hsl(var(--premium-teal))" },
+                { icon: BookOpen, label: "Learning", chip: "hsl(var(--premium-purple))" },
+                { icon: Sparkles, label: "Arts", chip: "hsl(var(--premium-pink))" },
+              ].map((item, idx) => {
+                const IconComponent = item.icon;
+                return (
+                  <div key={idx} className="text-center">
+                    <div
+                      className="w-11 h-11 mx-auto mb-1.5 rounded-2xl flex items-center justify-center text-white shadow-sm transition-transform hover:-translate-y-[1px]"
+                      style={{ backgroundColor: item.chip }}
+                    >
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <span className="text-[11px] font-semibold text-neutral-700">{item.label}</span>
                   </div>
-                  <span className="text-[11px] font-semibold text-neutral-700">{item.label}</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -165,13 +169,14 @@ const HeroSection = () => {
                 ))}
               </div>
 
-              {/* Floating badge (unchanged) */}
+              {/* Floating badge */}
               <div
                 className="absolute bottom-3 right-3 rounded-lg px-3 py-1.5 shadow-sm"
                 style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}
               >
                 <div className="flex items-center gap-1.5">
-                  <span className="text-white text-[12px] font-semibold">🕉️ Rooted in Values</span>
+                  <Heart className="w-4 h-4 text-white fill-white" />
+                  <span className="text-white text-[12px] font-semibold">Rooted in Values</span>
                 </div>
               </div>
             </div>

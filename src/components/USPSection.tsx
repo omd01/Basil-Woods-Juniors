@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
+import { Building2, Building, MapPin, BookOpen, Trophy, GraduationCap, Sprout, Star } from "lucide-react";
 
 /*
 USPSection — aligned with site standard
@@ -40,34 +41,34 @@ const gradientClass = (g) =>
 
 const USPSection = () => {
   const stats = [
-    { number: "11", label: "Preschools", icon: "🏫", gradient: "gradient-slide" },
-    { number: "6",  label: "Cities",     icon: "🏙️", gradient: "gradient-swing" },
-    { number: "4",  label: "States",     icon: "🗺️", gradient: "gradient-seesaw" },
+    { number: "11", label: "Preschools", icon: Building2, gradient: "gradient-slide" },
+    { number: "6",  label: "Cities",     icon: Building, gradient: "gradient-swing" },
+    { number: "4",  label: "States",     icon: MapPin, gradient: "gradient-seesaw" },
   ];
 
   const advantages = [
     {
       title: "Well-Researched Curriculum",
       description: "An engaging, scientifically designed curriculum by reputed academicians, blending innovation with foundational values.",
-      icon: "📚",
+      icon: BookOpen,
       gradient: "gradient-slide",
     },
     {
       title: "Award-Winning Preschool Program",
       description: "Selected among India's top preschool-cum-daycare centres by Education Today for two consecutive years.",
-      icon: "🏆",
+      icon: Trophy,
       gradient: "gradient-swing",
     },
     {
       title: "Experienced Academicians",
       description: "Teachers and facilitators specializing in early childhood education with decades of combined experience.",
-      icon: "👩‍🏫",
+      icon: GraduationCap,
       gradient: "gradient-seesaw",
     },
     {
       title: "Holistic Development",
       description: "A comprehensive approach nurturing physical, emotional, intellectual, and cultural growth through the 4Q model.",
-      icon: "🌱",
+      icon: Sprout,
       gradient: "gradient-sandbox",
     },
   ];
@@ -85,10 +86,11 @@ const USPSection = () => {
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
           <div
-            className="px-4 py-2 rounded-full inline-block mb-4 text-white"
+            className="px-4 py-2 rounded-full inline-flex items-center gap-2 mb-4 text-white"
             style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}
           >
-            🌟 Our Impact
+            <Star className="w-4 h-4 fill-white" />
+            Our Impact
           </div>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-800 leading-tight mb-3">
@@ -102,17 +104,20 @@ const USPSection = () => {
 
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-4xl mx-auto">
-          {stats.map((stat, i) => (
-            <Card key={i} className="text-center rounded-2xl p-6 shadow-sm border border-[hsl(var(--neutral-100))] bg-white hover:shadow-md transition-all hover:-translate-y-[2px]">
-              <div className={`${gradientClass(stat.gradient)} w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white`}>
-                <span className="text-2xl md:text-3xl">{stat.icon}</span>
-              </div>
-              <div className="text-4xl md:text-5xl font-bold mb-1.5 text-neutral-800">{stat.number}</div>
-              <div className="text-base md:text-lg font-semibold" style={{ color: "hsl(var(--premium-purple))" }}>
-                {stat.label}
-              </div>
-            </Card>
-          ))}
+          {stats.map((stat, i) => {
+            const IconComponent = stat.icon;
+            return (
+              <Card key={i} className="text-center rounded-2xl p-6 shadow-sm border border-[hsl(var(--neutral-100))] bg-white hover:shadow-md transition-all hover:-translate-y-[2px]">
+                <div className={`${gradientClass(stat.gradient)} w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white`}>
+                  <IconComponent className="w-8 h-8 md:w-10 md:h-10" strokeWidth={2} />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold mb-1.5 text-neutral-800">{stat.number}</div>
+                <div className="text-base md:text-lg font-semibold" style={{ color: "hsl(var(--premium-purple))" }}>
+                  {stat.label}
+                </div>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Advantages */}
@@ -126,20 +131,23 @@ const USPSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {advantages.map((adv, i) => (
-            <Card
-              key={i}
-              className="flex gap-4 rounded-2xl p-6 shadow-sm border border-[hsl(var(--neutral-100))] bg-white hover:shadow-md transition-all hover:-translate-y-[2px]"
-            >
-              <div className={`${gradientClass(adv.gradient)} w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white`}>
-                <span className="text-xl md:text-2xl">{adv.icon}</span>
-              </div>
-              <div>
-                <h4 className="text-lg md:text-xl font-bold text-neutral-800 mb-2">{adv.title}</h4>
-                <p className="text-neutral-700 leading-relaxed text-sm md:text-base">{adv.description}</p>
-              </div>
-            </Card>
-          ))}
+          {advantages.map((adv, i) => {
+            const IconComponent = adv.icon;
+            return (
+              <Card
+                key={i}
+                className="flex gap-4 rounded-2xl p-6 shadow-sm border border-[hsl(var(--neutral-100))] bg-white hover:shadow-md transition-all hover:-translate-y-[2px]"
+              >
+                <div className={`${gradientClass(adv.gradient)} w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-white`}>
+                  <IconComponent className="w-7 h-7 md:w-8 md:h-8" strokeWidth={2} />
+                </div>
+                <div>
+                  <h4 className="text-lg md:text-xl font-bold text-neutral-800 mb-2">{adv.title}</h4>
+                  <p className="text-neutral-700 leading-relaxed text-sm md:text-base">{adv.description}</p>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </div>
 

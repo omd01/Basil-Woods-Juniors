@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Camera, MapPin, Car, Shield, Heart, Calendar } from "lucide-react";
+import { Camera, MapPin, Car, Shield, Heart, Calendar, School, Trees, Drama, BookOpen, Palette, ShieldCheck } from "lucide-react";
 import picture1 from "@/assets/Images/Picture5.webp";
 import picture2 from "@/assets/Images/Picture3.webp";
 
@@ -25,37 +25,37 @@ const WaveBottom = ({ fill = "#e3e9fb" }) => (
 const FacilitiesSection = () => {
   const facilities = [
     {
-      icon: "🏫",
+      icon: School,
       title: "Inspiring Learning Spaces",
       desc: "Spacious, airy classrooms with child-friendly furniture and a vibrant environment that inspires curiosity.",
       features: ["Bright natural lighting", "Child-safe furniture & materials", "Ergonomic learning corners"],
     },
     {
-      icon: "🌳",
+      icon: Trees,
       title: "Outdoor Exploration Zones",
       desc: "Green play areas with safe equipment and sensory corners for exploration and movement.",
       features: ["Safe climbing structures", "Shady garden spots", "Butterfly & sensory gardens"],
     },
     {
-      icon: "🎭",
+      icon: Drama,
       title: "Performance & Expression Stage",
       desc: "A simple stage for music, dance, role-play, and storytelling to build confidence.",
       features: ["Mini stage", "Audio & music setup", "Costume & props"],
     },
     {
-      icon: "📚",
+      icon: BookOpen,
       title: "Engaging Reading Corners",
       desc: "Cozy library spaces with picture books and early readers for quiet discovery.",
       features: ["Age-appropriate storybooks", "Interactive kits", "Comfortable nooks"],
     },
     {
-      icon: "🎨",
+      icon: Palette,
       title: "Creative Arts Studio",
       desc: "A tidy art space to explore colors, textures, and expression.",
       features: ["Child-safe supplies", "Display walls", "Easy-clean stations"],
     },
     {
-      icon: "🛡️",
+      icon: ShieldCheck,
       title: "Safe & Secure Campus",
       desc: "Comprehensive safety measures for peace of mind.",
       features: ["24/7 CCTV", "Secure entry", "On-site medical kit"],
@@ -73,9 +73,10 @@ const FacilitiesSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-          <Badge className="px-4 py-2 rounded-full font-medium mb-3 text-white"
+          <Badge className="px-4 py-2 rounded-full font-medium mb-3 text-white inline-flex items-center gap-2"
             style={{ background: "linear-gradient(135deg, hsl(var(--premium-orange)), hsl(var(--premium-pink)))" }}>
-            🏰 Our Chennai Campus
+            <School className="w-4 h-4" />
+            Our Chennai Campus
           </Badge>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-800 leading-tight mb-2">
             Thoughtfully Designed Learning Spaces
@@ -132,27 +133,30 @@ const FacilitiesSection = () => {
 
         {/* Facilities — toned down */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {facilities.map((f, i) => (
-            <Card key={i} className="p-6 rounded-2xl bg-white shadow-sm border border-[hsl(var(--neutral-100))] transition-all hover:shadow-md hover:-translate-y-[2px]">
-              <div
-                className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl"
-                style={{ backgroundColor: "hsl(var(--neutral-50))" }}
-              >
-                {f.icon}
-              </div>
-              <h3 className="font-bold text-neutral-800 text-center mb-2">{f.title}</h3>
-              <p className="text-neutral-700 text-center mb-4 leading-relaxed text-sm">{f.desc}</p>
+          {facilities.map((f, i) => {
+            const IconComponent = f.icon;
+            return (
+              <Card key={i} className="p-6 rounded-2xl bg-white shadow-sm border border-[hsl(var(--neutral-100))] transition-all hover:shadow-md hover:-translate-y-[2px]">
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: "hsl(var(--neutral-50))" }}
+                >
+                  <IconComponent className="w-7 h-7" style={{ color: "hsl(var(--premium-orange))" }} strokeWidth={2} />
+                </div>
+                <h3 className="font-bold text-neutral-800 text-center mb-2">{f.title}</h3>
+                <p className="text-neutral-700 text-center mb-4 leading-relaxed text-sm">{f.desc}</p>
 
-              <ul className="space-y-2">
-                {f.features.map((feat, idx) => (
-                  <li key={idx} className="flex items-center gap-3">
-                    <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "hsl(var(--premium-orange))" }} />
-                    <span className="text-sm text-neutral-700">{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
+                <ul className="space-y-2">
+                  {f.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "hsl(var(--premium-orange))" }} />
+                      <span className="text-sm text-neutral-700">{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            );
+          })}
         </div>
       </div>
 

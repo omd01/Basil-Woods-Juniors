@@ -2,17 +2,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import WaveDivider from "@/components/ui/wave-divider";
+import { Sunrise, MessageCircle, BookOpen, Drama, Bus, Footprints, Palette, Leaf } from "lucide-react";
 
 const ProgramsSection = () => {
   const playgroundActivities = [
-    { title: "Activity Period",      description: "Our little ones transition smoothly from home to school, setting the mood for all the learning and excitement ahead!", icon: "🌅", gradient: "gradient-swing" },
-    { title: "Circle Time",          description: "Confidence blooms through speaking, listening, and social skills with fun-filled morning discussions.",                    icon: "🗣️", gradient: "gradient-slide" },
-    { title: "Phonics & Language",   description: "Children learn letter sounds, reading, and writing the fun ‘Jolly Phonics’ way!",                                      icon: "📚", gradient: "gradient-seesaw" },
-    { title: "Puppets & Story Time", description: "Stories come alive with friendly puppets, building vocabulary and sparking imagination.",                                icon: "🎭", gradient: "gradient-swing" },
-    { title: "Field Trips",          description: "Hands-on learning through carefully planned trips, creating lasting memories.",                                         icon: "🚌", gradient: "gradient-slide" },
-    { title: "Outdoor Play",         description: "30 minutes of sunshine, sand play, and structured games to keep kids active and happy.",                                icon: "🏃", gradient: "gradient-seesaw" },
-    { title: "Theme Time",           description: "A fresh theme each month keeps children engaged across diverse topics.",                                                 icon: "🎨", gradient: "gradient-swing" },
-    { title: "Art, Craft & Gardening", description: "From creative crafts to planting seeds — learning by doing in joyful ways.",                                          icon: "🌱", gradient: "gradient-slide" },
+    { title: "Activity Period",      description: "Our little ones transition smoothly from home to school, setting the mood for all the learning and excitement ahead!", icon: Sunrise, gradient: "gradient-swing" },
+    { title: "Circle Time",          description: "Confidence blooms through speaking, listening, and social skills with fun-filled morning discussions.",                    icon: MessageCircle, gradient: "gradient-slide" },
+    { title: "Phonics & Language",   description: "Children learn letter sounds, reading, and writing the fun 'Jolly Phonics' way!",                                      icon: BookOpen, gradient: "gradient-seesaw" },
+    { title: "Puppets & Story Time", description: "Stories come alive with friendly puppets, building vocabulary and sparking imagination.",                                icon: Drama, gradient: "gradient-swing" },
+    { title: "Field Trips",          description: "Hands-on learning through carefully planned trips, creating lasting memories.",                                         icon: Bus, gradient: "gradient-slide" },
+    { title: "Outdoor Play",         description: "30 minutes of sunshine, sand play, and structured games to keep kids active and happy.",                                icon: Footprints, gradient: "gradient-seesaw" },
+    { title: "Theme Time",           description: "A fresh theme each month keeps children engaged across diverse topics.",                                                 icon: Palette, gradient: "gradient-swing" },
+    { title: "Art, Craft & Gardening", description: "From creative crafts to planting seeds — learning by doing in joyful ways.",                                          icon: Leaf, gradient: "gradient-slide" },
   ];
 
   // Map gradient keys to your utilities
@@ -90,7 +91,7 @@ const ProgramsSection = () => {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <span className="text-2xl md:text-3xl">{activity.icon}</span>
+                  {React.createElement(activity.icon, { className: "w-8 h-8 md:w-10 md:h-10 text-white", strokeWidth: 2 })}
                 </motion.div>
 
                 <h3 className="font-bold text-lg md:text-xl text-neutral-800 mb-3 transition-colors">
