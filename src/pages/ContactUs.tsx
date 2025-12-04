@@ -255,7 +255,7 @@ const ContactUsPage: React.FC = () => {
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { title: "Schedule Tour", icon: Calendar, color: "bg-purple-500" },
+                  { title: "Schedule Tour", icon: Calendar, color: "bg-blue-500" },
                   { title: "Download Brochure", icon: Navigation, color: "bg-green-500" },
                   { title: "WhatsApp Us", icon: MessageCircle, color: "bg-green-600" },
                   { title: "Get Directions", icon: MapPin, color: "bg-blue-500" },

@@ -128,7 +128,7 @@ const GalleryPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02, rotate: 0, zIndex: 10 }}
-                className={`bg-white p-4 pb-12 shadow-xl transform ${image.rotate} transition-all duration-300 relative group`}
+                className={`bg-white p-4 pb-6 shadow-xl transform ${image.rotate} transition-all duration-300 relative group`}
               >
                 {/* Tape */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/30 backdrop-blur-sm border border-white/50 shadow-sm transform -rotate-1 z-20" />
@@ -141,7 +141,7 @@ const GalleryPage = () => {
                   />
                 </div>
 
-                <div className="absolute bottom-4 left-0 right-0 text-center">
+                <div className="mt-4 text-center">
                   <h3 className="font-handwriting text-2xl font-bold text-neutral-800">{image.title}</h3>
                   <p className="text-xs font-mono text-neutral-500 uppercase tracking-widest">{image.category}</p>
                 </div>
@@ -204,14 +204,14 @@ const GalleryPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={() => (window.location.href = "tel:+918056179108")}
-                  className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-6 px-8 rounded-xl text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]"
+                  className="bg-teal-500 hover:bg-[hsl(var(--brand-dark-green))] hover:text-white text-[hsl(var(--brand-dark-green))] font-bold py-6 px-8 rounded-xl text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]"
                 >
-                  <Phone className="w-6 h-6 mr-2" />
+                  <Phone className="w-6 h-6 mr-2 " />
                   Schedule a Visit
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 font-bold py-6 px-8 rounded-xl text-lg"
+                  className="border-2 border-teal-500 font-bold py-6 px-8 rounded-xl text-lg"
                   onClick={() => window.open("/brochure.pdf", "_blank")}
                 >
                   <Download className="w-6 h-6 mr-2" />
